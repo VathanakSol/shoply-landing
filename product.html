@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aurora Wireless Headphones — Vendora</title>
+<meta name="description" content="Aurora over-ear wireless headphones with 40h battery, active noise cancellation and studio-grade sound. Free shipping on orders over $50." />
+<style>
+  :root {
+    --ink: #14161f;
+    --muted: #5c6270;
+    --bg: #ffffff;
+    --soft: #f6f7fb;
+    --line: #e8eaf1;
+    --brand: #5b5bd6;
+    --brand-dark: #4343b8;
+    --accent: #ff7a59;
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(20, 22, 31, 0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { width: min(1160px, 92%); margin: 0 auto; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    background: var(--ink);
+    color: #fff;
+    font-size: 0.82rem;
+    text-align: center;
+    padding: 8px 16px;
+    letter-spacing: 0.02em;
+  }
+  .topbar b { color: #ffd166; }
+
+  /* ---------- Header / nav ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px; gap: 20px;
+  }
+  .logo { font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em; }
+  .logo span { color: var(--brand); }
+  .nav-links { display: flex; gap: 28px; font-weight: 500; font-size: 0.95rem; }
+  .nav-links a { color: var(--muted); transition: color .2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-actions { display: flex; align-items: center; gap: 14px; }
+  .icon-btn {
+    background: none; border: none; cursor: pointer; font-size: 1.15rem;
+    position: relative; color: var(--ink);
+  }
+  .cart-count {
+    position: absolute; top: -6px; right: -8px;
+    background: var(--accent); color: #fff; font-size: 0.65rem; font-weight: 700;
+    min-width: 17px; height: 17px; border-radius: 9px;
+    display: grid; place-items: center; padding: 0 4px;
+  }
+  .btn {
+    display: inline-block; border: none; cursor: pointer;
+    font-weight: 600; font-size: 0.95rem;
+    padding: 11px 22px; border-radius: 999px; transition: all .2s;
+  }
+  .btn-primary { background: var(--brand); color: #fff; }
+  .btn-primary:hover { background: var(--brand-dark); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+  .btn-ghost:hover { border-color: var(--ink); }
+  .menu-toggle { display: none; }
+
+  /* ---------- Breadcrumb ---------- */
+  .crumbs {
+    padding: 18px 0; font-size: 0.85rem; color: var(--muted);
+  }
+  .crumbs a:hover { color: var(--brand); }
+  .crumbs span { margin: 0 8px; opacity: .5; }
+  .crumbs b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Product layout ---------- */
+  .pdp { padding: 10px 0 60px; }
+  .pdp-grid {
+    display: grid; grid-template-columns: 1.05fr 0.95fr;
+    gap: 52px; align-items: start;
+  }
+
+  /* Gallery */
+  .gallery-main {
+    height: 440px; border-radius: 24px; overflow: hidden;
+    background: linear-gradient(135deg, #eef0ff 0%, #f6f7fb 60%, #fff1ec 100%);
+    display: grid; place-items: center; position: relative;
+    border: 1px solid var(--line);
+  }
+  .gallery-main .big-emoji { font-size: 9rem; filter: drop-shadow(0 20px 30px rgba(91,91,214,.25)); }
+  .sale-badge {
+    position: absolute; top: 18px; left: 18px;
+    background: var(--accent); color: #fff; font-weight: 700; font-size: 0.78rem;
+    padding: 6px 14px; border-radius: 999px;
+  }
+  .wishlist {
+    position: absolute; top: 18px; right: 18px;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #fff; border: 1px solid var(--line); cursor: pointer;
+    display: grid; place-items: center; font-size: 1.2rem;
+    box-shadow: var(--shadow); transition: transform .2s;
+  }
+  .wishlist:hover { transform: scale(1.08); }
+  .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px; }
+  .thumb {
+    height: 84px; border-radius: 14px; display: grid; place-items: center;
+    font-size: 2rem; cursor: pointer; border: 2px solid transparent;
+    transition: border-color .2s, transform .2s;
+  }
+  .thumb:hover { transform: translateY(-2px); }
+  .thumb.active { border-color: var(--brand); }
+  .th1 { background: linear-gradient(135deg,#eef0ff,#dfe2ff); }
+  .th2 { background: linear-gradient(135deg,#fff1ec,#ffe3d8); }
+  .th3 { background: linear-gradient(135deg,#e9fbf4,#d3f5e6); }
+  .th4 { background: linear-gradient(135deg,#fff8e6,#ffefc2); }
+
+  /* Info */
+  .info .cat-tag {
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--brand); font-weight: 700;
+  }
+  .info h1 {
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+    letter-spacing: -0.02em; line-height: 1.15; margin: 8px 0 12px;
+  }
+  .rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .stars { color: #f5b301; letter-spacing: 2px; font-size: 1rem; }
+  .rating-row small { color: var(--muted); }
+  .price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .price-now { font-size: 2rem; font-weight: 800; }
+  .price-was { color: var(--muted); text-decoration: line-through; font-size: 1.1rem; }
+  .save-pill {
+    background: #e9fbf4; color: #0ca678; font-weight: 700; font-size: 0.78rem;
+    padding: 4px 12px; border-radius: 999px;
+  }
+  .tax-note { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+  .desc { color: var(--muted); font-size: 1rem; margin-bottom: 26px; max-width: 52ch; }
+
+  /* Options */
+  .opt-label { font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; }
+  .opt-label span { color: var(--muted); font-weight: 500; }
+  .colors { display: flex; gap: 12px; margin-bottom: 24px; }
+  .swatch {
+    width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+    border: 3px solid transparent; outline: 2px solid var(--line);
+    outline-offset: 2px; transition: all .2s;
+  }
+  .swatch.active { border-color: var(--brand); outline-color: transparent; }
+  .qty-row { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+  .qty {
+    display: inline-flex; align-items: center; border: 1.5px solid var(--line);
+    border-radius: 999px; overflow: hidden;
+  }
+  .qty button {
+    width: 42px; height: 44px; border: none; background: var(--soft);
+    font-size: 1.1rem; cursor: pointer; transition: background .2s;
+  }
+  .qty button:hover { background: var(--line); }
+  .qty output { width: 44px; text-align: center; font-weight: 700; }
+  .stock { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--muted); }
+  .stock .dot { width: 9px; height: 9px; border-radius: 50%; background: #2ecc71; }
+
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 30px; }
+  .cta-row .btn-primary { flex: 1; min-width: 200px; padding: 15px 26px; font-size: 1rem; }
+  .cta-row .btn-ghost { padding: 15px 26px; }
+
+  /* Trust badges */
+  .trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .trust div {
+    background: var(--soft); border-radius: 12px; padding: 12px;
+    font-size: 0.82rem; text-align: center; color: var(--muted);
+  }
+  .trust div b { display: block; color: var(--ink); font-size: 0.9rem; margin-bottom: 2px; }
+
+  /* ---------- Tabs ---------- */
+  .tabs-section { padding: 30px 0 70px; }
+  .tabs {
+    display: flex; gap: 6px; border-bottom: 1.5px solid var(--line);
+    margin-bottom: 30px; flex-wrap: wrap;
+  }
+  .tab {
+    background: none; border: none; cursor: pointer; font-weight: 600;
+    font-size: 0.95rem; color: var(--muted); padding: 12px 18px;
+    border-bottom: 2.5px solid transparent; margin-bottom: -1.5px; transition: all .2s;
+  }
+  .tab.active { color: var(--brand); border-bottom-color: var(--brand); }
+  .tab-panel { display: none; animation: fade .3s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .tab-panel p { color: var(--muted); max-width: 70ch; margin-bottom: 14px; }
+  .spec-table { width: 100%; max-width: 640px; border-collapse: collapse; }
+  .spec-table td { padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 0.93rem; }
+  .spec-table td:first-child { color: var(--muted); width: 40%; }
+  .spec-table td:last-child { font-weight: 600; }
+  .highlights { list-style: none; max-width: 640px; }
+  .highlights li { padding: 8px 0 8px 30px; position: relative; color: var(--muted); }
+  .highlights li::before { content: "✓"; position: absolute; left: 0; color: #0ca678; font-weight: 800; }
+
+  /* ---------- Related products ---------- */
+  .related { background: var(--soft); padding: 70px 0; }
+  .section-head { text-align: center; max-width: 620px; margin: 0 auto 40px; }
+  .section-head h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); letter-spacing: -0.02em; }
+  .section-head p { color: var(--muted); margin-top: 10px; }
+  .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .product {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; transition: transform .2s, box-shadow .2s;
+  }
+  .product:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+  .p-img { height: 170px; display: grid; place-items: center; font-size: 3.2rem; position: relative; }
+  .p-body { padding: 14px 16px 18px; }
+  .p-cat { font-size: 0.72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .p-name { font-weight: 700; margin: 4px 0 8px; font-size: 0.98rem; }
+  .p-row { display: flex; align-items: center; justify-content: space-between; }
+  .price { font-weight: 800; font-size: 1.05rem; }
+  .price s { color: var(--muted); font-weight: 500; font-size: 0.82rem; margin-right: 6px; }
+  .add {
+    background: var(--soft); border: none; cursor: pointer; font-weight: 600;
+    padding: 7px 13px; border-radius: 999px; font-size: 0.82rem; transition: all .2s;
+  }
+  .add:hover { background: var(--brand); color: #fff; }
+  .g1 { background: #eef0ff; } .g2 { background: #fff1ec; }
+  .g3 { background: #e9fbf4; } .g4 { background: #fff8e6; }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--ink); color: #cfd2dc; padding: 56px 0 28px; margin-top: 0; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 30px; }
+  .foot-grid h4 { color: #fff; margin-bottom: 14px; font-size: 0.95rem; }
+  .foot-grid a { display: block; color: #aab0bf; font-size: 0.9rem; margin-bottom: 9px; transition: color .2s; }
+  .foot-grid a:hover { color: #fff; }
+  .foot-brand p { font-size: 0.9rem; margin-top: 12px; max-width: 34ch; }
+  .socials { display: flex; gap: 12px; margin-top: 16px; }
+  .socials a {
+    width: 38px; height: 38px; border-radius: 50%; background: #232634;
+    display: grid; place-items: center; font-size: 1rem;
+  }
+  .socials a:hover { background: var(--brand); color: #fff; }
+  .copy {
+    border-top: 1px solid #2a2d3a; margin-top: 40px; padding-top: 22px;
+    text-align: center; font-size: 0.85rem; color: #8b90a0;
+  }
+
+  /* ---------- Toast ---------- */
+  .toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--ink); color: #fff; padding: 13px 24px; border-radius: 999px;
+    font-size: 0.9rem; font-weight: 600; box-shadow: var(--shadow);
+    opacity: 0; transition: all .35s ease; z-index: 100; pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .menu-toggle { display: block; }
+    .pdp-grid { grid-template-columns: 1fr; gap: 32px; }
+    .gallery-main { height: 340px; }
+    .products { grid-template-columns: repeat(2, 1fr); }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .products, .foot-grid { grid-template-columns: 1fr; }
+    .trust { grid-template-columns: 1fr; }
+    .thumbs { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .thumb { height: 64px; font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">🚚 <b>Free shipping</b> on all orders over $50 &nbsp;·&nbsp; 30-day hassle-free returns</div>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo">Ven<span>dora</span></a>
+    <nav class="nav-links">
+      <a href="index.html#shop">Shop</a>
+      <a href="index.html#categories">Categories</a>
+      <a href="index.html#deals">Deals</a>
+      <a href="index.html#about">About</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Search">🔍</button>
+      <button class="icon-btn" aria-label="Cart">🛒<span class="cart-count" id="cartCount">0</span></button>
+      <a href="index.html#shop" class="btn btn-primary">Shop Now</a>
+      <button class="icon-btn menu-toggle" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="wrap crumbs">
+  <a href="index.html">Home</a><span>/</span>
+  <a href="index.html#categories">Tech &amp; Gadgets</a><span>/</span>
+  <a href="index.html#shop">Audio</a><span>/</span>
+  <b>Aurora Wireless Headphones</b>
+</div>
+
+<!-- PRODUCT -->
+<section class="pdp">
+  <div class="wrap pdp-grid">
+    <!-- Gallery -->
+    <div class="gallery">
+      <div class="gallery-main" id="mainImage">
+        <span class="sale-badge">-25% OFF</span>
+        <button class="wishlist" id="wishBtn" aria-label="Add to wishlist">🤍</button>
+        <span class="big-emoji" id="mainEmoji">🎧</span>
+      </div>
+      <div class="thumbs">
+        <div class="thumb th1 active" data-emoji="🎧" data-bg="linear-gradient(135deg,#eef0ff 0%,#f6f7fb 60%,#fff1ec 100%)">🎧</div>
+        <div class="thumb th2" data-emoji="🎵" data-bg="linear-gradient(135deg,#fff1ec,#ffe3d8)">🎵</div>
+        <div class="thumb th3" data-emoji="🔋" data-bg="linear-gradient(135deg,#e9fbf4,#d3f5e6)">🔋</div>
+        <div class="thumb th4" data-emoji="📦" data-bg="linear-gradient(135deg,#fff8e6,#ffefc2)">📦</div>
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="info">
+      <span class="cat-tag">Tech &amp; Gadgets · Audio</span>
+      <h1>Aurora Wireless Over-Ear Headphones</h1>
+      <div class="rating-row">
+        <span class="stars">★★★★★</span>
+        <small>4.9 · 2,340 reviews</small>
+      </div>
+      <div class="price-row">
+        <span class="price-now">$149.00</span>
+        <span class="price-was">$199.00</span>
+        <span class="save-pill">Save $50</span>
+      </div>
+      <p class="tax-note">Inclusive of VAT · Free shipping on this item</p>
+      <p class="desc">Immerse yourself in studio-grade sound with adaptive noise cancellation, plush memory-foam ear cushions, and a 40-hour battery that keeps up with your longest days.</p>
+
+      <p class="opt-label">Color: <span id="colorName">Midnight Blue</span></p>
+      <div class="colors">
+        <div class="swatch active" style="background:#3b3f8f" data-name="Midnight Blue"></div>
+        <div class="swatch" style="background:#f4f1ea" data-name="Cloud White"></div>
+        <div class="swatch" style="background:#2b2b2b" data-name="Graphite Black"></div>
+        <div class="swatch" style="background:#ff7a59" data-name="Sunset Coral"></div>
+      </div>
+
+      <div class="qty-row">
+        <div class="qty">
+          <button id="minus" aria-label="Decrease quantity">−</button>
+          <output id="qtyOut">1</output>
+          <button id="plus" aria-label="Increase quantity">+</button>
+        </div>
+        <span class="stock"><span class="dot"></span> In stock — ships within 24h</span>
+      </div>
+
+      <div class="cta-row">
+        <button class="btn btn-primary" id="addToCart">Add to Cart — $149.00</button>
+        <button class="btn btn-ghost" id="buyNow">Buy It Now</button>
+      </div>
+
+      <div class="trust">
+        <div><b>🚚 Free Shipping</b>Arrives in 2–4 days</div>
+        <div><b>↩️ 30-Day Returns</b>Free return label</div>
+        <div><b>🛡️ 2-Year Warranty</b>Covered, no questions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABS -->
+<section class="tabs-section">
+  <div class="wrap">
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="desc">Description</button>
+      <button class="tab" data-tab="specs">Specifications</button>
+      <button class="tab" data-tab="reviews">Reviews (2,340)</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-desc">
+      <p>The Aurora was engineered for people who take their sound seriously. A custom 40mm dynamic driver delivers deep, controlled bass and crisp highs, while our third-generation adaptive ANC samples ambient noise 500 times per second to keep the world out — or lets it in with one tap when you need to hear it.</p>
+      <p>With 40 hours of playtime on a single charge (and a 10-minute quick charge giving you 5 extra hours), the Aurora goes from Monday's commute to Friday's flight without hunting for an outlet. Multipoint Bluetooth 5.3 pairs two devices at once, so switching between laptop and phone is seamless.</p>
+      <ul class="highlights">
+        <li>Adaptive Active Noise Cancellation with Transparency mode</li>
+        <li>40-hour battery · USB-C fast charging</li>
+        <li>Multipoint connection — pair 2 devices simultaneously</li>
+        <li>Memory-foam ear cushions, foldable travel design</li>
+        <li>Built-in mic array for clear hands-free calls</li>
+      </ul>
+    </div>
+
+    <div class="tab-panel" id="tab-specs">
+      <table class="spec-table">
+        <tr><td>Driver</td><td>40mm dynamic, neodymium magnet</td></tr>
+        <tr><td>Frequency response</td><td>20 Hz – 20 kHz</td></tr>
+        <tr><td>Bluetooth</td><td>5.3 · AAC, SBC, LDAC</td></tr>
+        <tr><td>Battery life</td><td>40 h (ANC on) · 55 h (ANC off)</td></tr>
+        <tr><td>Charging</td><td>USB-C · full charge in 90 min</td></tr>
+        <tr><td>Weight</td><td>248 g</td></tr>
+        <tr><td>In the box</td><td>Headphones, hard case, USB-C cable, 3.5mm cable, airline adapter</td></tr>
+        <tr><td>Warranty</td><td>2 years limited</td></tr>
+      </table>
+    </div>
+
+    <div class="tab-panel" id="tab-reviews">
+      <p><strong>Sarah T.</strong> ★★★★★ — "Best headphones I've owned. The noise cancelling on my daily train ride is unreal, and they're comfortable enough to wear all day."</p>
+      <p><strong>Marcus L.</strong> ★★★★★ — "Battery genuinely lasts a full work week. Sound quality punches way above the price point."</p>
+      <p><strong>Priya D.</strong> ★★★★☆ — "Great sound and build. Only wish the case were a bit slimmer, but otherwise perfect."</p>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section class="related">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>You may also like</h2>
+      <p>Complete your setup with these customer favorites.</p>
+    </div>
+    <div class="products">
+      <a class="product" href="#">
+        <div class="p-img g2">🎙️</div>
+        <div class="p-body">
+          <div class="p-cat">Audio</div>
+          <div class="p-name">Pulse Studio Microphone</div>
+          <div class="p-row"><span class="price"><s>$129</s>$99</span><button class="add">Add +</button></div>
+        </div>
+      </a>
+      <a class="product" href="#">
+        <div class="p-img g3">⌚</div>
+        <div class="p-body">
+          <div class="p-cat">Wearables</div>
+          <div class="p-name">Nova Smart Watch S2</div>
+          <div class="p-row"><span class="price">$199</span><button class="add">Add +</button></div>
+        </div>
+      </a>
+      <a class="product" href="#">
+        <div class="p-img g1">🔊</div>
+        <div class="p-body">
+          <div class="p-cat">Audio</div>
+          <div class="p-name">Echo Mini Speaker</div>
+          <div class="p-row"><span class="price"><s>$79</s>$59</span><button class="add">Add +</button></div>
+        </div>
+      </a>
+      <a class="product" href="#">
+        <div class="p-img g4">🔌</div>
+        <div class="p-body">
+          <div class="p-cat">Accessories</div>
+          <div class="p-name">Volt 65W GaN Charger</div>
+          <div class="p-row"><span class="price">$45</span><button class="add">Add +</button></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a href="index.html" class="logo" style="color:#fff">Ven<span style="color:#9b8cff">dora</span></a>
+      <p>Curated fashion, tech, and home essentials from brands you trust. Quality goods, fair prices, checkout in seconds.</p>
+      <div class="socials">
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Facebook">f</a>
+      </div>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="index.html#categories">Fashion</a>
+      <a href="index.html#categories">Tech &amp; Gadgets</a>
+      <a href="index.html#categories">Home &amp; Living</a>
+      <a href="index.html#categories">Beauty</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="#">Help Center</a>
+      <a href="#">Shipping &amp; Delivery</a>
+      <a href="#">Returns &amp; Refunds</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="index.html#about">About Vendora</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="wrap copy">© 2025 Vendora. All rights reserved. This is a demo storefront.</div>
+</footer>
+
+<div class="toast" id="toast">Added to cart ✓</div>
+
+<script>
+  // ---- Quantity ----
+  let qty = 1;
+  const qtyOut = document.getElementById('qtyOut');
+  const addBtn = document.getElementById('addToCart');
+  const PRICE = 149.00;
+  function fmt(n){ return '$' + n.toFixed(2); }
+  function updateQty(){
+    qtyOut.textContent = qty;
+    addBtn.textContent = 'Add to Cart — ' + fmt(PRICE * qty);
+  }
+  document.getElementById('plus').onclick = () => { qty = Math.min(qty + 1, 10); updateQty(); };
+  document.getElementById('minus').onclick = () => { qty = Math.max(qty - 1, 1); updateQty(); };
+
+  // ---- Color swatches ----
+  const colorName = document.getElementById('colorName');
+  document.querySelectorAll('.swatch').forEach(s => {
+    s.onclick = () => {
+      document.querySelectorAll('.swatch').forEach(x => x.classList.remove('active'));
+      s.classList.add('active');
+      colorName.textContent = s.dataset.name;
+    };
+  });
+
+  // ---- Gallery thumbs ----
+  const mainEmoji = document.getElementById('mainEmoji');
+  const mainImage = document.getElementById('mainImage');
+  document.querySelectorAll('.thumb').forEach(t => {
+    t.onclick = () => {
+      document.querySelectorAll('.thumb').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      mainEmoji.textContent = t.dataset.emoji;
+      mainImage.style.background = t.dataset.bg;
+    };
+  });
+
+  // ---- Wishlist ----
+  const wishBtn = document.getElementById('wishBtn');
+  wishBtn.onclick = () => {
+    const wished = wishBtn.textContent === '❤️';
+    wishBtn.textContent = wished ? '🤍' : '❤️';
+    showToast(wished ? 'Removed from wishlist' : 'Saved to wishlist ♥');
+  };
+
+  // ---- Cart + toast ----
+  let cart = 0;
+  const cartCount = document.getElementById('cartCount');
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+  addBtn.onclick = () => {
+    cart += qty;
+    cartCount.textContent = cart;
+    showToast(qty + ' × Aurora added to cart ✓');
+  };
+  document.getElementById('buyNow').onclick = () => showToast('Redirecting to secure checkout…');
+  document.querySelectorAll('.add').forEach(b => {
+    b.onclick = e => {
+      e.preventDefault();
+      cart += 1;
+      cartCount.textContent = cart;
+      showToast('Added to cart ✓');
+    };
+  });
+
+  // ---- Tabs ----
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.onclick = () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    };
+  });
+</script>
+</body>
+</html>
